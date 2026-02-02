@@ -16,9 +16,8 @@ namespace Wire
     {
         int port = 443;
 
-        if (Utils::String::split(addr, "://").size() > 0)
+        if (Utils::String::split(addr, "://").size() > 1)
         {
-            std::cout << Utils::String::split(addr, "://")[0] << std::endl;
             if (Utils::String::split(addr, "://")[0] == "https")
             {
                 port = 443;
