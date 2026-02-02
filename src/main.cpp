@@ -1,13 +1,3 @@
-#include <iostream>
-#include <cstring>
-#include <unistd.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-
-#include <openssl/ssl.h>
-#include <openssl/err.h>
-
 int main()
 {
     const char* domain = "www.google.com";
