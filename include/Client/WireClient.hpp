@@ -1,8 +1,13 @@
 #pragma once
 
-#include <string>
+#include <iostream>
+#include <cstring>
 
+#include "Resolver/Resolver.hpp"
+#include "Net/TcpSocket.hpp"
+#include "TLS/TlsSocket.hpp"
 #include "Core/Response.hpp"
+#include "Utils/String.hpp"
 
 namespace Wire
 {
