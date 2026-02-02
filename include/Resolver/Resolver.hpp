@@ -1,6 +1,9 @@
 #pragma once
 
-#include <string>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <cstring>
+#include <stdexcept>
 
 namespace Wire
 {

@@ -10,20 +10,24 @@
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
+#include "Resolver/Resolver.hpp"
+
 namespace Wire
 {
     class TcpSocket
     {
     public:
-        bool connect(char* domain, char* port);
+        TcpSocket();
+        ~TcpSocket();
+
+        bool connectTo(const char *ip, int port);
         ssize_t send(const void *data, size_t len);
         ssize_t recv(void *buf, size_t len);
+
+        int fd() const;
         void close();
 
     private:
         int sock;
-
-        addrinfo hints{};
-        addrinfo *res;
     };
 } // namespace Wire
