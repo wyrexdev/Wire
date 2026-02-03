@@ -34,6 +34,47 @@ namespace Wire
                 res.status = statusLine.substr(p2 + 1);
             }
 
+            size_t headerStart = pos + 2;
+            size_t headerEnd = raw.find("\r\n\r\n", headerStart);
+
+            if (headerEnd == std::string::npos)
+                throw std::runtime_error("Invalid headers");
+
+            std::string headersBlock =
+                raw.substr(headerStart, headerEnd - headerStart);
+
+            auto lines = Utils::String::split(headersBlock, "\r\n");
+
+            for (const auto &line : lines)
+            {
+                auto colon = line.find(':');
+                if (colon == std::string::npos)
+                    continue;
+
+                std::string key = Utils::String::toLowerCase(Utils::String::trim(line.substr(0, colon)));
+                std::string value = Utils::String::trim(line.substr(colon + 1));
+
+                res.headers[key] = {key, value};
+            }
+
+            bool hasBody = true;
+
+            if (res.statusCode / 100 == 1 ||
+                res.statusCode == 204 ||
+                res.statusCode == 304)
+            {
+                hasBody = false;
+            }
+
+            auto cl = res.headers.find("content-length");
+            if (cl != res.headers.end())
+            {
+                int len = std::stoi(cl->second.val);
+                size_t bodyStart = headerEnd + 4;
+
+                res.body = raw.substr(bodyStart, len);
+            }
+
             return res;
         }
     } // namespace HTTP

@@ -3,7 +3,7 @@
 int main() {
     Wire::WireClient *client = new Wire::WireClient();
 
-    std::cout << client->get("https://google.com").statusCode << std::endl;
+    std::cout << client->get("https://google.com").body << std::endl;
 
     return 0;
 }
