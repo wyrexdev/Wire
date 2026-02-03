@@ -11,11 +11,14 @@ namespace Wire
     {
         struct Response
         {
-            std::string body;
-            
-            std::unordered_map<std::string, HTTP::Header> headers;
+            std::string httpVersion;
             
             int statusCode;
+            std::string status;
+
+            std::unordered_map<std::string, HTTP::Header> headers;
+
+            std::string body;
         };
         
     } // namespace Core
