@@ -30,8 +30,6 @@ namespace Wire
             addr = Utils::String::split(addr, "://")[1];
         }
 
-        Core::Response res;
-
         std::string ip = Resolver::resolveIPv4(addr);
         std::cout << "IP: " << ip << "\n";
 
@@ -57,13 +55,17 @@ namespace Wire
 
         tls.send(req, strlen(req));
 
+        std::string body;
+
         char buf[4096];
         ssize_t n;
         while ((n = tls.recv(buf, sizeof(buf) - 1)) > 0)
         {
             buf[n] = 0;
-            res.body += buf;
+            body += buf;
         }
+
+        Core::Response res = HTTP::Parser::parse(body);
 
         return res;
     }

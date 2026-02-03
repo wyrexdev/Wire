@@ -1,6 +1,9 @@
 #pragma once
 
+#include <iostream>
+
 #include "Core/Response.hpp"
+#include "Utils/String.hpp"
 
 namespace Wire
 {

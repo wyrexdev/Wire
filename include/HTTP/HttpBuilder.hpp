@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Core/Request.hpp"
+#include "HTTP/Header/Header.hpp"
 
 namespace Wire
 {
