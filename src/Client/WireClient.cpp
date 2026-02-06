@@ -12,6 +12,7 @@ namespace Wire
     {
     }
 
+    // In the here we need depth for too much redirect
     Core::Response WireClient::get(std::string addr)
     {
         int port = 443;
@@ -54,6 +55,7 @@ namespace Wire
         std::string req =
             ("GET " + path + " HTTP/1.1\r\n") +
             ("Host: " + host + "\r\n") +
+            ("Accept-Language: " + Utils::System::getLanguage() + "\r\n") +
             "User-Agent: Void-Wire/0.1\r\n"
             "Connection: close\r\n\r\n";
 
@@ -87,6 +89,11 @@ namespace Wire
         }
 
         Core::Response res = HTTP::Parser::parse(raw);
+
+        auto redirect = res.headers.find("location");
+        if(redirect != res.headers.end()) {
+            return get(redirect->second.val);
+        }
 
         return res;
     }

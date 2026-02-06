@@ -3,7 +3,8 @@
 int main() {
     Wire::WireClient *client = new Wire::WireClient();
 
-    std::cout << client->get("https://www.google.com/webhp").body << std::endl;
+    // client->get("https://netflix.com").body;
+    std::cout << client->get("https://netflix.com").body << std::endl;
 
     return 0;
 }

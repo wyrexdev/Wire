@@ -8,6 +8,7 @@
 #include "TLS/TlsSocket.hpp"
 #include "Core/Response.hpp"
 #include "Utils/String.hpp"
+#include "Utils/System.hpp"
 #include "HTTP/HttpParser.hpp"
 
 namespace Wire

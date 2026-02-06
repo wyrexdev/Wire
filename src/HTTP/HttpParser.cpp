@@ -43,6 +43,8 @@ namespace Wire
 
             for (const auto &line : lines)
             {
+                // std::cout << "Line: " << line << std::endl;
+
                 auto colon = line.find(':');
                 if (colon == std::string::npos)
                     continue;
