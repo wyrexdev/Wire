@@ -59,7 +59,7 @@ namespace Wire
 
         tls.send(req.data(), req.size());
 
-        std::string body;
+        std::string raw;
         char buf[4096];
 
         while (true)
@@ -68,7 +68,7 @@ namespace Wire
 
             if (n > 0)
             {
-                body.append(buf, n);
+                raw.append(buf, n);
                 continue;
             }
 
@@ -86,7 +86,7 @@ namespace Wire
             break;
         }
 
-        Core::Response res = HTTP::Parser::parse(body);
+        Core::Response res = HTTP::Parser::parse(raw);
 
         return res;
     }
