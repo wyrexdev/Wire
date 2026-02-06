@@ -26,7 +26,6 @@ namespace Wire
 
         int fd() const;
         void close();
-
     private:
         int sock;
     };

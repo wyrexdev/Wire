@@ -18,6 +18,7 @@ namespace Wire
         ssize_t recv(void *buf, size_t len);
         void close();
 
+        int lastError(int ret);
     private:
         SSL_CTX *ctx;
         SSL *ssl;

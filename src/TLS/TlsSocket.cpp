@@ -24,11 +24,17 @@ namespace Wire
 
         SSL_set_tlsext_host_name(ssl, host.c_str());
 
+        const unsigned char alpn[] = {
+            8, 'h', 't', 't', 'p', '/', '1', '.', '1'};
+
+        SSL_set_alpn_protos(ssl, alpn, sizeof(alpn));
+
         if (SSL_connect(ssl) <= 0)
         {
             ERR_print_errors_fp(stderr);
             return false;
         }
+        
         return true;
     }
 
@@ -56,4 +62,10 @@ namespace Wire
             ctx = nullptr;
         }
     }
+
+    int TlsSocket::lastError(int ret)
+    {
+        return SSL_get_error(ssl, ret);
+    }
+
 } // namespace Wire

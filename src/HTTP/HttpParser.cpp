@@ -47,6 +47,8 @@ namespace Wire
 
             for (const auto &line : lines)
             {
+                std::cout << line << std::endl;
+
                 auto colon = line.find(':');
                 if (colon == std::string::npos)
                     continue;
@@ -66,13 +68,25 @@ namespace Wire
                 hasBody = false;
             }
 
-            auto cl = res.headers.find("content-length");
-            if (cl != res.headers.end())
+            auto isChunked = res.headers.find("transfer-chunked");
+            if (isChunked != res.headers.end())
             {
-                int len = std::stoi(cl->second.val);
-                size_t bodyStart = headerEnd + 4;
+                std::string chunkedVal = isChunked->second.val;
 
-                res.body = raw.substr(bodyStart, len);
+                if (chunkedVal == "chunked")
+                {
+                }
+                else
+                {
+                    auto cl = res.headers.find("content-length");
+                    if (cl != res.headers.end())
+                    {
+                        int len = std::stoi(cl->second.val);
+                        size_t bodyStart = headerEnd + 4;
+
+                        res.body = raw.substr(bodyStart, len);
+                    }
+                }
             }
 
             return res;
