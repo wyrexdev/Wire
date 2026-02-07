@@ -111,7 +111,7 @@ namespace Wire
             std::cout << "Too much redirections detected!" << std::endl;
 
             Core::Response tmr;
-            std::string content = FS::FileSystem::readFile("./system-pages/redirects/too-much-redirect.html");
+            std::string content = Utils::FileSystem::readFile("./system-pages/redirects/too-much-redirect.html");
             tmr.body = content;
 
             return tmr;

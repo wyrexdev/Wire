@@ -58,9 +58,9 @@ namespace Wire
                 res.headers[key] = {key, value};
             }
 
-            if (res.statusCode / 100 == 1 ||
-                res.statusCode == 204 ||
-                res.statusCode == 304)
+            if (res.statusCode.has_value() && (res.statusCode.value() / 100 == 1 ||
+                res.statusCode.value() == 204 ||
+                res.statusCode.value() == 304))
             {
                 return res;
             }
