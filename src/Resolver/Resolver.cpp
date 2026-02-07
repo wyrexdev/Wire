@@ -21,4 +21,21 @@ namespace Wire
         freeaddrinfo(res);
         return ip;
     }
+
+    std::string Resolver::resolveEndpoint(std::string input)
+    {
+        auto schemeSplit = Utils::String::split(input, "://");
+        std::string hostPart;
+
+        if (schemeSplit.size() >= 2)
+            hostPart = schemeSplit[1];
+        else
+            hostPart = schemeSplit[0];
+
+        auto pathSplit = Utils::String::split(hostPart, "/");
+        if (!pathSplit.empty())
+            return pathSplit[0];
+
+        return hostPart;
+    }
 } // namespace Wire
