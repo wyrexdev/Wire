@@ -9,6 +9,7 @@
 #include "Core/Response.hpp"
 #include "Utils/String.hpp"
 #include "Utils/System.hpp"
+#include "Utils/FS.hpp"
 #include "HTTP/HttpParser.hpp"
 
 namespace Wire
@@ -19,7 +20,7 @@ namespace Wire
         WireClient();
         ~WireClient();
 
-        Core::Response get(std::string addr, int depth);
+        Core::Response get(std::string addr, std::string scheme, std::string host, int depth);
         Core::Response post(std::string addr);
     };
 } // namespace Wire

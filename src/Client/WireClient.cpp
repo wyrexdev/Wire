@@ -13,15 +13,8 @@ namespace Wire
     }
 
     // In the here we need depth for too much redirect
-    Core::Response WireClient::get(std::string addr, int depth = 0)
+    Core::Response WireClient::get(std::string addr, std::string s, std::string h, int depth = 0)
     {
-        if(depth >= 10) {
-            Core::Response tmr;
-            tmr.body = "";
-        }
-
-        depth++;
-
         int port = 443;
         std::string path = "/";
         std::string scheme = "https";
@@ -34,18 +27,28 @@ namespace Wire
 
             port = (scheme == "https") ? 443 : 80;
         }
+        else
+        {
+            addr = h + "/" + addr;
+            port = 443;
+        }
+
+        s = scheme;
 
         auto pathSplit = Utils::String::split(addr, "/");
-        if (pathSplit.size() > 1)
+
+        size_t slashPos = addr.find('/');
+        if (slashPos != std::string::npos)
         {
-            path = "/" + pathSplit[1];
+            path = addr.substr(slashPos);
         }
 
         std::string host = pathSplit[0];
         std::string referer = scheme + "://" + host;
 
+        h = host;
+
         std::string ip = Resolver::resolveIPv4(host);
-        std::cout << referer << std::endl;
 
         TcpSocket tcp;
         if (!tcp.connectTo(ip.c_str(), port))
@@ -97,9 +100,25 @@ namespace Wire
 
         Core::Response res = HTTP::Parser::parse(raw);
 
+        if (depth >= 10)
+        {
+            if (!(res.statusCode.has_value()))
+            {
+                Core::Response tmr;
+                std::string content = FS::FileSystem::readFile("./system-pages/redirects/too-much-redirect.html");
+                tmr.body = content;
+
+                return tmr;
+            }
+        }
+
+        depth++;
+
         auto redirect = res.headers.find("location");
-        if(redirect != res.headers.end()) {
-            return get(redirect->second.val, depth);
+        if (redirect != res.headers.end())
+        {
+            std::cout << "Redirected to: " << redirect->second.val << std::endl;
+            return get(redirect->second.val, scheme, host, depth);
         }
 
         return res;
