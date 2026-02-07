@@ -13,8 +13,15 @@ namespace Wire
     }
 
     // In the here we need depth for too much redirect
-    Core::Response WireClient::get(std::string addr)
+    Core::Response WireClient::get(std::string addr, int depth = 0)
     {
+        if(depth >= 10) {
+            Core::Response tmr;
+            tmr.body = "";
+        }
+
+        depth++;
+
         int port = 443;
         std::string path = "/";
         std::string scheme = "https";
@@ -92,7 +99,7 @@ namespace Wire
 
         auto redirect = res.headers.find("location");
         if(redirect != res.headers.end()) {
-            return get(redirect->second.val);
+            return get(redirect->second.val, depth);
         }
 
         return res;

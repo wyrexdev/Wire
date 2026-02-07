@@ -19,7 +19,7 @@ namespace Wire
         WireClient();
         ~WireClient();
 
-        Core::Response get(std::string addr);
+        Core::Response get(std::string addr, int depth);
         Core::Response post(std::string addr);
     };
 } // namespace Wire
