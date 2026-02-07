@@ -100,16 +100,21 @@ namespace Wire
 
         Core::Response res = HTTP::Parser::parse(raw);
 
-        if (depth >= 10)
+        if (depth >= 10 && res.statusCode.has_value() && (
+            res.statusCode.value() == 301 ||
+            res.statusCode.value() == 302 ||
+            res.statusCode.value() == 303 ||
+            res.statusCode.value() == 307 ||
+            res.statusCode.value() == 308
+        ))
         {
-            if (!(res.statusCode.has_value()))
-            {
-                Core::Response tmr;
-                std::string content = FS::FileSystem::readFile("./system-pages/redirects/too-much-redirect.html");
-                tmr.body = content;
+            std::cout << "Too much redirections detected!" << std::endl;
 
-                return tmr;
-            }
+            Core::Response tmr;
+            std::string content = FS::FileSystem::readFile("./system-pages/redirects/too-much-redirect.html");
+            tmr.body = content;
+
+            return tmr;
         }
 
         depth++;
