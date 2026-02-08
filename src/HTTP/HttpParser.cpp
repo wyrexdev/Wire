@@ -108,9 +108,8 @@ namespace Wire
             if(ce != res.headers.end()) {
                 std::string encoding = ce->second.val;
 
-                if(encoding == "gzip") {
-                    
-                }
+                Core::Codec::Type type = Core::Codec::Type::fromHeader(encoding);
+                auto decoder = Core::Codec::Factory::create(type);
             }
 
             res.body = rawBody;

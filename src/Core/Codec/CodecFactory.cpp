@@ -8,6 +8,7 @@ namespace Wire
         {
             Core::C Factory::create(Type type) {
                 Core::C c;
+                c.setCodec(type.getCodec());
                 
                 return c;
             }

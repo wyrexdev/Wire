@@ -6,12 +6,23 @@ namespace Wire
     {
         namespace Codec
         {
-            int Type::fromHeader(std::string v) {
+            Type Type::fromHeader(std::string v) {
+                Type t;
                 if(v == "gzip") {
-                    return 0;
+                    t.setCodec(0);
                 }
 
-                return -1;
+                t.setCodec(-1);
+
+                return t;
+            }
+
+            void Type::setCodec(int i) {
+                codec = i;
+            }
+
+            int Type::getCodec() {
+                return codec;
             }
         } // namespace Codec
     } // namespace Core
