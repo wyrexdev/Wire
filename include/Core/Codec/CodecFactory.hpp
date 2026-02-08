@@ -1,6 +1,7 @@
 #pragma once
 
-#include <string>
+#include "Core/Codec/Codec.hpp"
+#include "Core/Codec/CodecType.hpp"
 
 namespace Wire
 {
@@ -8,14 +9,10 @@ namespace Wire
     {
         namespace Codec
         {
-            class Type
+            class Factory
             {
             public:
-                static Type fromHeader(std::string v);
-
-            private:
-                void setCodec(int c);
-                int getCodec();
+                static Core::C create(Codec::Type type);
             };
         } // namespace Codec
     } // namespace Core

@@ -4,9 +4,10 @@ namespace Wire
 {
     namespace Core
     {
-        class Codec
+        class C
         {
         public:
+            
         };
         
     } // namespace Core
