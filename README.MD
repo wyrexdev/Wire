@@ -41,12 +41,8 @@ Wire is a low-level networking and protocol engine designed for speed, correctne
 
 <h3 style="font-family: 'Trebuchet MS', sans-serif;">1.2 - ZLib Installation</h3>
 
----
-
-<h3 style="font-family: 'Trebuchet MS', sans-serif;">1.3 - Git Clone</h3>
-
 ```
-git clone https://github.com/wyrexdev/void.git
+sudo pacman -S zlib
 ```
 
 ---
