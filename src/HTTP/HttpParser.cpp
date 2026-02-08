@@ -104,6 +104,15 @@ namespace Wire
                 return res;
             }
 
+            auto ce = res.headers.find("content-encoding");
+            if(ce != res.headers.end()) {
+                std::string encoding = ce->second.val;
+
+                if(encoding == "gzip") {
+                    
+                }
+            }
+
             res.body = rawBody;
             return res;
         }

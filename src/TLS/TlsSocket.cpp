@@ -45,7 +45,7 @@ namespace Wire
 
     ssize_t TlsSocket::recv(void *buf, size_t len)
     {
-        return SSL_read(ssl, buf, len);
+        return SSL_read(ssl, buf, len - 1);
     }
 
     void TlsSocket::close()

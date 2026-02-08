@@ -22,5 +22,7 @@ namespace Wire
 
         Core::Response get(std::string addr, std::string scheme, std::string host, int depth);
         Core::Response post(std::string addr);
+
+        size_t utf8_valid_prefix_len(const std::string &s);
     };
 } // namespace Wire

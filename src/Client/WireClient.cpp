@@ -29,7 +29,7 @@ namespace Wire
         }
         else
         {
-            addr = h + "/" + addr;
+            addr = h;
             port = 443;
         }
 
@@ -66,17 +66,22 @@ namespace Wire
             ("GET " + path + " HTTP/1.1\r\n") +
             ("Host: " + host + "\r\n") +
             ("Accept-Language: " + Utils::System::getLanguage() + "\r\n") +
+            "Accept-Encoding: gzip, deflate, br, zstd\r\n"
+            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
             "User-Agent: Void-Wire/0.1\r\n"
             "Connection: close\r\n\r\n";
 
         tls.send(req.data(), req.size());
 
         std::string raw;
+        std::string response;
         char buf[4096];
 
         while (true)
         {
-            ssize_t n = tls.recv(buf, sizeof(buf));
+            int n = tls.recv(buf, sizeof(buf));
+
+            std::cout << "-" << buf << std::endl;
 
             if (n > 0)
             {
@@ -99,14 +104,10 @@ namespace Wire
         }
 
         Core::Response res = HTTP::Parser::parse(raw);
+        
+        std::cout << response << std::endl;
 
-        if (depth >= 10 && res.statusCode.has_value() && (
-            res.statusCode.value() == 301 ||
-            res.statusCode.value() == 302 ||
-            res.statusCode.value() == 303 ||
-            res.statusCode.value() == 307 ||
-            res.statusCode.value() == 308
-        ))
+        if (depth >= 10 && res.statusCode.has_value() && (res.statusCode.value() == 301 || res.statusCode.value() == 302 || res.statusCode.value() == 303 || res.statusCode.value() == 307 || res.statusCode.value() == 308))
         {
             std::cout << "Too much redirections detected!" << std::endl;
 
