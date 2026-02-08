@@ -47,7 +47,7 @@ sudo pacman -S zlib
 
 ---
 
-<h3 style="font-family: 'Trebuchet MS', sans-serif;">1.4 - Git Clone</h3>
+<h3 style="font-family: 'Trebuchet MS', sans-serif;">1.3 - Git Clone</h3>
 
 ```
 git clone https://github.com/wyrexdev/Wire.git
@@ -55,7 +55,7 @@ git clone https://github.com/wyrexdev/Wire.git
 
 ---
 
-<h3 style="font-family: 'Trebuchet MS', sans-serif;">1.5 - Install Wire</h3>
+<h3 style="font-family: 'Trebuchet MS', sans-serif;">1.4 - Install Wire</h3>
 
 ```
 sudo make install
