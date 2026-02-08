@@ -11,6 +11,12 @@ namespace Wire
             class Type
             {
             public:
+                enum Types {
+                    Indetity = -1,
+                    GZip = 0,
+                    Brotli = 1
+                };
+
                 static Type fromHeader(std::string v);
 
                 int getCodec();

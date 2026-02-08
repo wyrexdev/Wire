@@ -10,7 +10,7 @@ AR  := ar
 # =========================
 CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -Iinclude
 CFLAGS   := -O2 -Wall -Wextra -Iinclude
-LDFLAGS  := -lssl -lcrypto
+LDFLAGS  := -lssl -lcrypto -lz
 
 # =========================
 # DIRECTORIES

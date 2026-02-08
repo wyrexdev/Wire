@@ -9,10 +9,10 @@ namespace Wire
             Type Type::fromHeader(std::string v) {
                 Type t;
                 if(v == "gzip") {
-                    t.setCodec(0);
+                    t.setCodec(Types::GZip);
                 }
 
-                t.setCodec(-1);
+                t.setCodec(Types::Indetity);
 
                 return t;
             }

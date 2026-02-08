@@ -66,7 +66,7 @@ namespace Wire
             ("GET " + path + " HTTP/1.1\r\n") +
             ("Host: " + host + "\r\n") +
             ("Accept-Language: " + Utils::System::getLanguage() + "\r\n") +
-            "Accept-Encoding: gzip, deflate, br, zstd\r\n"
+            "Accept-Encoding: gzip\r\n"
             "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
             "User-Agent: Void-Wire/0.1\r\n"
             "Connection: close\r\n\r\n";

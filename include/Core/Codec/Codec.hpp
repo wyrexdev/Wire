@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Codec/Gzip/Gzip.hpp"
+#include "Core/Codec/CodecType.hpp"
 
 #include <string>
 

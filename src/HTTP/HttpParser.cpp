@@ -110,6 +110,8 @@ namespace Wire
 
                 Core::Codec::Type type = Core::Codec::Type::fromHeader(encoding);
                 auto decoder = Core::Codec::Factory::create(type);
+
+                decoder.decode(rawBody, rawBody);
             }
 
             res.body = rawBody;
