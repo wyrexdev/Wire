@@ -11,11 +11,7 @@ namespace Wire
             class Type
             {
             public:
-                static Type fromHeader(std::string v);
-
-            private:
-                void setCodec(int c);
-                int getCodec();
+                static int fromHeader(std::string v);
             };
         } // namespace Codec
     } // namespace Core
