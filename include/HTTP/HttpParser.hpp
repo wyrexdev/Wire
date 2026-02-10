@@ -1,22 +1,15 @@
 #pragma once
-
-#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <optional>
 
 #include "Core/Response.hpp"
-#include "Utils/String.hpp"
 
-#include "Core/Codec/Codec.hpp"
-#include "Core/Codec/CodecFactory.hpp"
-#include "Core/Codec/CodecType.hpp"
-
-namespace Wire
+namespace Wire::HTTP
 {
-    namespace HTTP
+    class Parser
     {
-        class Parser
-        {
-        public:
-            static Core::Response parse(const std::string& raw);
-        };
-    } // namespace HTTP
-} // namespace Wire
+    public:
+        static Core::Response parse(const std::string& raw);
+    };
+}

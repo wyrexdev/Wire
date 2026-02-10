@@ -81,8 +81,6 @@ namespace Wire
         {
             int n = tls.recv(buf, sizeof(buf));
 
-            std::cout << "-" << buf << std::endl;
-
             if (n > 0)
             {
                 raw.append(buf, n);
@@ -104,13 +102,9 @@ namespace Wire
         }
 
         Core::Response res = HTTP::Parser::parse(raw);
-        
-        std::cout << response << std::endl;
 
         if (depth >= 10 && res.statusCode.has_value() && (res.statusCode.value() == 301 || res.statusCode.value() == 302 || res.statusCode.value() == 303 || res.statusCode.value() == 307 || res.statusCode.value() == 308))
         {
-            std::cout << "Too much redirections detected!" << std::endl;
-
             Core::Response tmr;
             std::string content = Utils::FileSystem::readFile("./system-pages/redirects/too-much-redirect.html");
             tmr.body = content;
